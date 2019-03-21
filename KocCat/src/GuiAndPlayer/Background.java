@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Edible.Fruit;
+import Edible.Poison;
 
 public class Background extends JPanel implements KeyListener {
 	private final String catUpPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_up.png";
@@ -34,6 +35,8 @@ public class Background extends JPanel implements KeyListener {
 	private ImageIcon background = new ImageIcon(backgroundPath);
 	private Cat cat = new Cat(300, 300, catRightPath);
 	private Fruit fruit = new Fruit(randomX, randomY, greenApplePath);
+	//the reason I did not use RandomX and random Y in here is that I don't want the fruit and the poison to have the same initial position
+	private Poison poison = new Poison(50 * rand.nextInt(13), 50 * rand.nextInt(13), greenPoisonPath);
 
 //	public static void main(String[] args) {
 //		MainMenu mm = new MainMenu();
@@ -50,6 +53,8 @@ public class Background extends JPanel implements KeyListener {
 		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		//this line is to prevent user from changing the size as it would break the design.
+		frame.setResizable(false);
 		addKeyListener(this);
 
 //		Handler handler = new Handler();
@@ -61,6 +66,7 @@ public class Background extends JPanel implements KeyListener {
 			cat.isOnTheEdge();
 			cat.doAction();
 			fruit.grow();
+			poison.grow();
 			if (cat.getX() == fruit.getX() && cat.getY() == fruit.getY()) {
 				randomX = 50 * rand.nextInt(13);
 				randomY = 50 * rand.nextInt(13);
@@ -68,14 +74,22 @@ public class Background extends JPanel implements KeyListener {
 				cat.increaseScore(fruit.getAge() * 2);
 				fruit.setRandomLocation(randomX, randomY);
 
+			} else if (cat.getX() == poison.getX() && cat.getY() == poison.getY()) {
+				randomX = 50 * rand.nextInt(13);
+				randomY = 50 * rand.nextInt(13);
+				// make cat.decreaseScore
+				// set cat.isAlive false if
+				cat.increaseScore(-(poison.getAge() * 2));
+				poison.setRandomLocation(randomX, randomY);
+
 			}
-			System.out.println("fruit age is: " + fruit.getAge());
+			// System.out.println("fruit age is: " + fruit.getAge());
 			// System.out.print("catY: " + cat.getY() + " catX: " + cat.getX());
 			// System.out.println("fruitY: " + fruit.getY() + " fruitX: " + fruit.getX());
 
-			System.out.println(cat.getScore());
+			// System.out.println(cat.getScore());
 			try {
-				Thread.sleep(50);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -97,6 +111,7 @@ public class Background extends JPanel implements KeyListener {
 		// drawing the cat
 		cat.draw(g);
 		fruit.draw(g);
+		poison.draw(g);
 	}
 
 	@Override

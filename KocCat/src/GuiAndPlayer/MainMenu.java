@@ -22,10 +22,12 @@ public class MainMenu extends JFrame {
 	private final JLabel Poison;
 
 	private final JButton start;
+	
+
 
 	public MainMenu() {
 		super("KocCat Mainmenu");
-		setLayout(new GridLayout(10,3));
+		setLayout(new GridLayout(6,3));
 		Ghosts = new JLabel("Enter the number of ghosts");
 		add(Ghosts);
 		numGhosts = new JTextField(6);

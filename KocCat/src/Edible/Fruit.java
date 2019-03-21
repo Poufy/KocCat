@@ -58,11 +58,6 @@ public class Fruit extends Edibles {
 	}
 
 	// this method returns the score to the cat to obtain if it consumes it
-	@Override
-	public void consumed() {
-		this.respawn();
-		// return (int) this.age * 5;
-	}
 
 	@Override
 	public void grow() {
@@ -76,14 +71,14 @@ public class Fruit extends Edibles {
 			}
 		}
 
-		respawn();
+		consumed();
 	}
 
 	/*
 	 * In this method I respawn the fruit when its age is 10 and also reinitlize the
 	 * random X and Y so the fruit does not spawn in the same location
 	 */
-	public void respawn() {
+	public void consumed() {
 		if (this.getAge() >= 10) {
 			int randomX = 50 * rand.nextInt(13);
 			int randomY = 50 * rand.nextInt(13);
