@@ -3,20 +3,12 @@ package GuiAndPlayer;
 import java.awt.AWTException;
 import java.awt.Graphics;
 import java.awt.Robot;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import Edible.Fruit;
 import Edible.Poison;
 
@@ -34,9 +26,10 @@ public class Background extends JPanel implements KeyListener {
 	private JFrame frame = new JFrame("KocCat");
 	private ImageIcon background = new ImageIcon(backgroundPath);
 	private Cat cat = new Cat(300, 300, catRightPath);
-	private Fruit fruit = new Fruit(randomX, randomY, greenApplePath);
-	//the reason I did not use RandomX and random Y in here is that I don't want the fruit and the poison to have the same initial position
-	private Poison poison = new Poison(50 * rand.nextInt(13), 50 * rand.nextInt(13), greenPoisonPath);
+	private Fruit fruit = new Fruit(greenApplePath);
+	// the reason I did not use RandomX and random Y in here is that I don't want
+	// the fruit and the poison to have the same initial position
+	private Poison poison = new Poison(greenPoisonPath);
 
 //	public static void main(String[] args) {
 //		MainMenu mm = new MainMenu();
@@ -53,7 +46,8 @@ public class Background extends JPanel implements KeyListener {
 		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		//this line is to prevent user from changing the size as it would break the design.
+		// this line is to prevent user from changing the size as it would break the
+		// design.
 		frame.setResizable(false);
 		addKeyListener(this);
 

@@ -1,26 +1,24 @@
 package Edible;
 
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Fruit extends Edibles {
-	private int x, y;
 	private double age = 1;
 	private String image;
 	private final String redApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\red_apple.png";
 	public final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
 	Random rand = new Random();
 
-	public Fruit(int x, int y, String image) {
+	public Fruit(String image) {
+		
 		try {
 			setImage(image);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		setX(x);
-		setY(y);
+
 	}
 
 	public void setImage(String image) throws Exception {
@@ -32,21 +30,6 @@ public class Fruit extends Edibles {
 		this.image = image;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 
 	public double getAge() {
 		return age;
