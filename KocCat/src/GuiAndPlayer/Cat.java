@@ -6,27 +6,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Cat extends Drawable {
-	private int  x, y, direction;
+	private int direction;
 	private double score;
 	private String image;
 	private boolean isAlive = true, rightBlocked = false, leftBlocked = false, upBlocked = false, downBlocked = false;
 
-	public Cat(int x, int y, String image) {
-		try {
-			setImage(image);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		setX(x);
-		setY(y);
+	public Cat(int x, int y) {
+		super(x, y);
 	}
 
 	public double getScore() {
 		return score;
 	}
 
+	public void setScore(double score) {
+		this.score = score;
+	}
+
 	public void increaseScore(double score) {
 		this.score += score;
+	}
+
+	public void decreaseScore(double score) {
+		this.score -= score;
 	}
 
 	public boolean isAlive() {
@@ -37,25 +39,11 @@ public class Cat extends Drawable {
 		this.isAlive = isAlive;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
+	// this method is for changing the image when changing directions.
 	public void setImage(String image) throws Exception {
-		if (image == null) {
-			throw new Exception("Enter a valid String");
+
+		if (image.equals("") || image == null) {
+			throw new Exception("Enter the correct image path");
 		}
 		this.image = image;
 	}
@@ -74,8 +62,8 @@ public class Cat extends Drawable {
 		case 1:
 			if (!rightBlocked)
 				this.setX(this.getX() + 50);
-			//System.out.println(this.getX());
-			//System.out.println(rightBlocked);
+			// System.out.println(this.getX());
+			// System.out.println(rightBlocked);
 			break;
 		case 2:
 			if (!leftBlocked)
@@ -84,12 +72,12 @@ public class Cat extends Drawable {
 			break;
 		case 3:
 			if (!upBlocked)
-			this.setY(this.getY() - 50);
+				this.setY(this.getY() - 50);
 
 			break;
 		case 4:
 			if (!downBlocked)
-			this.setY(this.getY() + 50);
+				this.setY(this.getY() + 50);
 
 			break;
 		}
@@ -122,5 +110,8 @@ public class Cat extends Drawable {
 		else
 			downBlocked = false;
 	}
-
+	//the loop runs as long as the score is >= 0 so this stops the game
+	public void die() {
+		this.score = -1;
+	}
 }

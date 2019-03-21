@@ -8,7 +8,7 @@ public class Fruit extends Edibles {
 	private double age = 1;
 	private String image;
 	private final String redApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\red_apple.png";
-	public final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
+	private final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
 	Random rand = new Random();
 
 	public Fruit(String image) {
@@ -44,7 +44,7 @@ public class Fruit extends Edibles {
 
 	@Override
 	public void grow() {
-		this.age += 0.25;
+		this.age += 0.1;
 		if (this.age >= 5) {
 			try {
 				this.setImage(redApplePath);
