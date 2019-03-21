@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import Edible.Fruit;
 import Edible.Poison;
 import Ghosts.Ash;
+import Ghosts.Casper;
 import Ghosts.Dolly;
 
 public class Background extends JPanel implements KeyListener {
@@ -32,6 +33,7 @@ public class Background extends JPanel implements KeyListener {
 	private Fruit fruit = new Fruit(greenApplePath);
 	private Ash ash = new Ash(50 * rand.nextInt(13), 50 * rand.nextInt(13));
 	private Dolly dolly = new Dolly(50 * rand.nextInt(13), 50 * rand.nextInt(13));
+	private Casper casper = new Casper(50 * rand.nextInt(13), 50 * rand.nextInt(13));
 	// the reason I did not use RandomX and random Y in here is that I don't want
 	// the fruit and the poison to have the same initial position
 	private Poison poison = new Poison(greenPoisonPath);
@@ -47,7 +49,8 @@ public class Background extends JPanel implements KeyListener {
 		frame.add(this);// setting the size of the frame to the size of the images
 		// these numbers 666 and 689 make for a square frame if you call getWidth and
 		// getHeight both should be 650
-		frame.setSize(666, 689);
+		frame.setSize(655, 678);
+		System.out.println(frame.getWidth());
 		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -67,25 +70,10 @@ public class Background extends JPanel implements KeyListener {
 			cat.doAction();
 			ash.doAction();
 			dolly.doAction();
+			casper.doAction();
 			fruit.grow();
 			poison.grow();
-
-			// collision with fruits and poison
-			if (cat.getX() == fruit.getX() && cat.getY() == fruit.getY()) {
-				// we increase the score first because setRandomLocation sets age = 1
-				cat.increaseScore(fruit.getAge() * 5);
-				fruit.setRandomLocation(50 * rand.nextInt(13), 50 * rand.nextInt(13));
-
-			} else if (cat.getX() == poison.getX() && cat.getY() == poison.getY()) {
-				// make cat.decreaseScore
-				// set cat.isAlive false if
-				cat.decreaseScore(poison.getAge() * 10);
-
-			} else if (cat.getX() == ash.getX() && cat.getY() == ash.getY()) {
-				cat.die();
-			} else if (cat.getX() == dolly.getX() && cat.getY() == dolly.getY()) {
-				cat.die();
-			}
+			checkCollision();
 			System.out.println(cat.getScore());
 
 			// System.out.println("fruit age is: " + fruit.getAge());
@@ -94,7 +82,7 @@ public class Background extends JPanel implements KeyListener {
 
 			// System.out.println(cat.getScore());
 			try {
-				Thread.sleep(400);
+				Thread.sleep(200);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -118,7 +106,29 @@ public class Background extends JPanel implements KeyListener {
 		poison.draw(g);
 		ash.draw(g);
 		dolly.draw(g);
+		casper.draw(g);
 		cat.draw(g);
+	}
+
+	public void checkCollision() {
+		// collision with fruits and poison
+		if (cat.getX() == fruit.getX() && cat.getY() == fruit.getY()) {
+			// we increase the score first because setRandomLocation sets age = 1
+			cat.increaseScore(fruit.getAge() * 5);
+			fruit.setRandomLocation(50 * rand.nextInt(13), 50 * rand.nextInt(13));
+
+		} else if (cat.getX() == poison.getX() && cat.getY() == poison.getY()) {
+			// make cat.decreaseScore
+			// set cat.isAlive false if
+			cat.decreaseScore(poison.getAge() * 10);
+
+		} else if (cat.getX() == ash.getX() && cat.getY() == ash.getY()) {
+			cat.die();
+		} else if (cat.getX() == dolly.getX() && cat.getY() == dolly.getY()) {
+			cat.die();
+		} else if (cat.getX() == casper.getX() && cat.getY() == casper.getY()) {
+			cat.die();
+		}
 	}
 
 	@Override
