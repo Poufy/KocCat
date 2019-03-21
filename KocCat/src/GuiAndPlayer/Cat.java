@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Cat extends Drawable {
-	private int score, x, y, direction;
+	private int  x, y, direction;
+	private double score;
 	private String image;
 	private boolean isAlive = true, rightBlocked = false, leftBlocked = false, upBlocked = false, downBlocked = false;
 
@@ -20,11 +21,11 @@ public class Cat extends Drawable {
 		setY(y);
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void increaseScore(int score) {
+	public void increaseScore(double score) {
 		this.score += score;
 	}
 

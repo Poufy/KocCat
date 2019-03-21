@@ -11,10 +11,7 @@ public class Fruit extends Edibles {
 	private String image;
 	private final String redApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\red_apple.png";
 	public final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
-
-	private Random rand = new Random();
-	private int randomX = 50 * rand.nextInt(13);
-	private int randomY = 50 * rand.nextInt(13);
+	Random rand = new Random();
 
 	public Fruit(int x, int y, String image) {
 		try {
@@ -82,10 +79,15 @@ public class Fruit extends Edibles {
 		respawn();
 	}
 
+	/*
+	 * In this method I respawn the fruit when its age is 10 and also reinitlize the
+	 * random X and Y so the fruit does not spawn in the same location
+	 */
 	public void respawn() {
 		if (this.getAge() >= 10) {
-			this.setX(randomX);
-			this.setY(randomY);
+			int randomX = 50 * rand.nextInt(13);
+			int randomY = 50 * rand.nextInt(13);
+			setRandomLocation(randomX, randomY);
 			try {
 				this.setImage(greenApplePath);
 			} catch (Exception e) {
@@ -96,8 +98,16 @@ public class Fruit extends Edibles {
 
 	}
 
-	public void setRandomLocation() {
+	public void setRandomLocation(int randomX, int randomY) {
+
 		this.setX(randomX);
 		this.setY(randomY);
+		try {
+			this.setImage(greenApplePath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.age = 1;
 	}
 }

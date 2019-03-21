@@ -61,15 +61,21 @@ public class Background extends JPanel implements KeyListener {
 			cat.isOnTheEdge();
 			cat.doAction();
 			fruit.grow();
-			if(cat.getX() == fruit.getY() && cat.getY() == fruit.getY()) {
-				fruit.respawn();
+			if (cat.getX() == fruit.getX() && cat.getY() == fruit.getY()) {
+				randomX = 50 * rand.nextInt(13);
+				randomY = 50 * rand.nextInt(13);
+				// we increase the score first because setRandomLocation sets age = 1
+				cat.increaseScore(fruit.getAge() * 2);
+				fruit.setRandomLocation(randomX, randomY);
+
 			}
-//			System.out.println("fruit age is: " + fruit.getAge());
-			System.out.print("catY: "+cat.getY()+"  catX: " + cat.getX());
-			System.out.print("fruitY: "+fruit.getY()+"  fruitX: " + fruit.getX()/10);
+			System.out.println("fruit age is: " + fruit.getAge());
+			// System.out.print("catY: " + cat.getY() + " catX: " + cat.getX());
+			// System.out.println("fruitY: " + fruit.getY() + " fruitX: " + fruit.getX());
+
 			System.out.println(cat.getScore());
 			try {
-				Thread.sleep(500);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
