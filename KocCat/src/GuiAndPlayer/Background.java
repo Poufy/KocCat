@@ -1,10 +1,14 @@
 package GuiAndPlayer;
 
+import java.awt.AWTException;
 import java.awt.Graphics;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,21 +17,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import Edible.Fruit;
+
 public class Background extends JPanel implements KeyListener {
 	private final String catUpPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_up.png";
 	private final String catDownPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_down.png";
 	private final String catRightPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_right.png";
 	private final String catLeftPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_left.png";
 	private final String backgroundPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\background1.png";
+	public final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
+	public final String greenPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_poison.png";
+	private Random rand = new Random();
+	private int randomX = 50 * rand.nextInt(13);
+	private int randomY = 50 * rand.nextInt(13);
 	private JFrame frame = new JFrame("KocCat");
 	private ImageIcon background = new ImageIcon(backgroundPath);
 	private Cat cat = new Cat(300, 300, catRightPath);
+	private Fruit fruit = new Fruit(randomX, randomY, greenApplePath);
 
-	public static void main(String[] args) {
-		// MainMenu mm = new MainMenu();
-		Background background = new Background();
-
-	}
+//	public static void main(String[] args) {
+//		MainMenu mm = new MainMenu();
+//		Background background = new Background();
+//
+//	}
 
 	public Background() {
 		setFocusable(true);// adding the panel to the frame.
@@ -43,10 +55,19 @@ public class Background extends JPanel implements KeyListener {
 //		Handler handler = new Handler();
 //		Timer timer = new Timer(1000, handler);
 //		timer.start();
+		startMovingRight();
 		while (cat.isAlive()) {
-			//checks the edges of the cat
+			// checks the edges of the cat
 			cat.isOnTheEdge();
 			cat.doAction();
+			fruit.grow();
+			if(cat.getX() == fruit.getY() && cat.getY() == fruit.getY()) {
+				fruit.respawn();
+			}
+//			System.out.println("fruit age is: " + fruit.getAge());
+			System.out.print("catY: "+cat.getY()+"  catX: " + cat.getX());
+			System.out.print("fruitY: "+fruit.getY()+"  fruitX: " + fruit.getX()/10);
+			System.out.println(cat.getScore());
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -69,6 +90,7 @@ public class Background extends JPanel implements KeyListener {
 		}
 		// drawing the cat
 		cat.draw(g);
+		fruit.draw(g);
 	}
 
 	@Override
@@ -76,7 +98,7 @@ public class Background extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			cat.setDirection(1);
-			
+
 			try {
 				cat.setImage(catRightPath);
 			} catch (Exception e1) {
@@ -115,6 +137,24 @@ public class Background extends JPanel implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 
+	}
+
+	/*
+	 * this method is only for making the cat move to the right from the beginning.
+	 * it only initializes a robot that presses the right button so the cat starts
+	 * moving right away if this is a violation of the rules then please just delete
+	 * this method.*
+	 */
+	public void startMovingRight() {
+		try {
+			Robot robot = new Robot();
+			// Simulate a key press
+			robot.keyPress(KeyEvent.VK_RIGHT);
+			robot.keyRelease(KeyEvent.VK_RIGHT);
+
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

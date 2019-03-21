@@ -24,8 +24,8 @@ public class Cat extends Drawable {
 		return score;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+	public void increaseScore(int score) {
+		this.score += score;
 	}
 
 	public boolean isAlive() {
@@ -73,8 +73,8 @@ public class Cat extends Drawable {
 		case 1:
 			if (!rightBlocked)
 				this.setX(this.getX() + 50);
-			System.out.println(this.getX());
-			System.out.println(rightBlocked);
+			//System.out.println(this.getX());
+			//System.out.println(rightBlocked);
 			break;
 		case 2:
 			if (!leftBlocked)
