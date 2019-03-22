@@ -61,23 +61,23 @@ public class Cat extends Drawable {
 		switch (direction) {
 		case 1:
 			if (!rightBlocked)
-				this.setX(this.getX() + 50);
+				this.setX(this.getX() + 1);
 			// System.out.println(this.getX());
 			// System.out.println(rightBlocked);
 			break;
 		case 2:
 			if (!leftBlocked)
-				this.setX(this.getX() - 50);
+				this.setX(this.getX() - 1);
 
 			break;
 		case 3:
 			if (!upBlocked)
-				this.setY(this.getY() - 50);
+				this.setY(this.getY() - 1);
 
 			break;
 		case 4:
 			if (!downBlocked)
-				this.setY(this.getY() + 50);
+				this.setY(this.getY() + 1);
 
 			break;
 		}

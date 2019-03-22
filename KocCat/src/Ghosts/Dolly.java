@@ -37,9 +37,9 @@ public class Dolly extends Drawable {
 		}
 
 		if (movingDown) {
-			this.setY(this.getY() + 50);
+			this.setY(this.getY() + 1);
 		} else {
-			this.setY(this.getY() - 50);
+			this.setY(this.getY() - 1);
 		}
 
 	}

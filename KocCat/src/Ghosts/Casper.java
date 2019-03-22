@@ -38,9 +38,9 @@ public class Casper extends Drawable {
 			}
 
 			if (movingDown) {
-				this.setY(this.getY() + 50);
+				this.setY(this.getY() + 1);
 			} else {
-				this.setY(this.getY() - 50);
+				this.setY(this.getY() - 1);
 			}
 			break;
 		case 1:
@@ -52,9 +52,9 @@ public class Casper extends Drawable {
 			}
 
 			if (movingRight) {
-				this.setX(this.getX() + 50);
+				this.setX(this.getX() + 1);
 			} else {
-				this.setX(this.getX() - 50);
+				this.setX(this.getX() - 1);
 			}
 			break;
 		}

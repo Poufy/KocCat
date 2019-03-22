@@ -44,7 +44,7 @@ public class Fruit extends Edibles {
 
 	@Override
 	public void grow() {
-		this.age += 0.1;
+		this.age += 0.01;
 		if (this.age >= 5) {
 			try {
 				this.setImage(redApplePath);

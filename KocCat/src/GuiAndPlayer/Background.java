@@ -82,7 +82,7 @@ public class Background extends JPanel implements KeyListener {
 
 			// System.out.println(cat.getScore());
 			try {
-				Thread.sleep(200);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -96,11 +96,11 @@ public class Background extends JPanel implements KeyListener {
 		// painting the background with the image we have
 		g.drawImage(background.getImage(), 0, 0, null);
 		// drawing the squares
-		for (int i = 0; i < this.getHeight(); i += 50) {
-			for (int j = 0; j < this.getWidth(); j += 50) {
-				g.drawRect(j, i, 50, 50);
-			}
-		}
+//		for (int i = 0; i < this.getHeight(); i += 50) {
+//			for (int j = 0; j < this.getWidth(); j += 50) {
+//				g.drawRect(j, i, 50, 50);
+//			}
+//		}
 
 		fruit.draw(g);
 		poison.draw(g);

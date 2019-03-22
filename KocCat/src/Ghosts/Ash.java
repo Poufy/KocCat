@@ -37,9 +37,9 @@ public class Ash extends Drawable {
 		}
 
 		if (movingRight) {
-			this.setX(this.getX() + 50);
+			this.setX(this.getX() + 1);
 		} else {
-			this.setX(this.getX() - 50);
+			this.setX(this.getX() - 1);
 		}
 
 	}
