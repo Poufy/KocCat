@@ -5,9 +5,11 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import Ghosts.Drawable;
+
 public class Cat extends Drawable {
 	private int direction;
-	private double score;
+	private int score;
 	private String image;
 	private boolean isAlive = true, rightBlocked = false, leftBlocked = false, upBlocked = false, downBlocked = false;
 
@@ -15,19 +17,19 @@ public class Cat extends Drawable {
 		super(x, y);
 	}
 
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
-	public void increaseScore(double score) {
+	public void increaseScore(int score) {
 		this.score += score;
 	}
 
-	public void decreaseScore(double score) {
+	public void decreaseScore(int score) {
 		this.score -= score;
 	}
 
@@ -93,19 +95,19 @@ public class Cat extends Drawable {
 	}
 
 	public void isOnTheEdge() {
-		if (this.getX() == 600)
+		if (this.getX() >= 600)
 			rightBlocked = true;
 		else
 			rightBlocked = false;
-		if (this.getX() == 0)
+		if (this.getX() <= 0)
 			leftBlocked = true;
 		else
 			leftBlocked = false;
-		if (this.getY() == 0)
+		if (this.getY() <= 0)
 			upBlocked = true;
 		else
 			upBlocked = false;
-		if (this.getY() == 600)
+		if (this.getY() >= 600)
 			downBlocked = true;
 		else
 			downBlocked = false;

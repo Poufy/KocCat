@@ -1,15 +1,8 @@
 package Ghosts;
-
 import java.awt.Graphics;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import GuiAndPlayer.Background;
-import GuiAndPlayer.Drawable;
-
 public class Dolly extends Drawable {
-	private Random rand = new Random();
 	private boolean movingDown = true;
 	public Dolly(int x, int y) {
 		super(x, y);
@@ -38,6 +31,9 @@ public class Dolly extends Drawable {
 			this.setY(this.getY() + 1);
 		} else {
 			this.setY(this.getY() - 1);
+		}
+		if (checkCollision()) {
+			Background.cat.die();
 		}
 
 	}

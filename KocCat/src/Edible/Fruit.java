@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
+import GuiAndPlayer.Background;
+
 public class Fruit extends Edibles {
 	private double age = 1;
 	private String image;
@@ -11,8 +13,9 @@ public class Fruit extends Edibles {
 	private final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
 	Random rand = new Random();
 
-	public Fruit(String image) {
-		
+	public Fruit(int x, int y, String image) {
+
+		super(x, y);
 		try {
 			setImage(image);
 		} catch (Exception e) {
@@ -29,7 +32,6 @@ public class Fruit extends Edibles {
 		}
 		this.image = image;
 	}
-
 
 	public double getAge() {
 		return age;
@@ -53,8 +55,11 @@ public class Fruit extends Edibles {
 				e.printStackTrace();
 			}
 		}
-
-		consumed();
+		if (checkCollision()) {
+			Background.cat.increaseScore((int) this.getAge() * 5);
+			this.setRandomLocation(rand.nextInt(600), rand.nextInt(600));
+		}
+		consumed();// this is only called when age is 10
 	}
 
 	/*
@@ -63,9 +68,7 @@ public class Fruit extends Edibles {
 	 */
 	public void consumed() {
 		if (this.getAge() >= 10) {
-			int randomX = 50 * rand.nextInt(13);
-			int randomY = 50 * rand.nextInt(13);
-			setRandomLocation(randomX, randomY);
+			setRandomLocation(rand.nextInt(600), rand.nextInt(600));
 			try {
 				this.setImage(greenApplePath);
 			} catch (Exception e) {

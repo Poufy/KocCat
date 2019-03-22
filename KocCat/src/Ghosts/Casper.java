@@ -3,7 +3,8 @@ package Ghosts;
 import java.awt.Graphics;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import GuiAndPlayer.Drawable;
+
+import GuiAndPlayer.Background;
 
 public class Casper extends Drawable {
 	private Random rand = new Random();
@@ -22,7 +23,6 @@ public class Casper extends Drawable {
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 
-	// MAKE WIDTH AND HEIGHT PUBLIC
 	@Override
 	public void doAction() {
 		// TODO Auto-generated method stub
@@ -56,6 +56,9 @@ public class Casper extends Drawable {
 				this.setX(this.getX() - 1);
 			}
 			break;
+		}
+		if (checkCollision()) {
+			Background.cat.die();
 		}
 
 	}

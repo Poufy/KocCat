@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
+import GuiAndPlayer.Background;
+
 public class Poison extends Edibles {
 	private double age = 1;
 	private String image;
@@ -11,8 +13,8 @@ public class Poison extends Edibles {
 	public final String greenPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_poison.png";
 	Random rand = new Random();
 
-	public Poison( String image) {
-		
+	public Poison(int x, int y, String image) {
+		super(x, y);
 		try {
 			setImage(image);
 		} catch (Exception e) {
@@ -29,7 +31,6 @@ public class Poison extends Edibles {
 		}
 		this.image = image;
 	}
-
 
 	public double getAge() {
 		return age;
@@ -51,12 +52,13 @@ public class Poison extends Edibles {
 				e.printStackTrace();
 			}
 		}
+		if (checkCollision()) {
+			Background.cat.decreaseScore((int)this.age * 10);
+		}
 	}
 
 	public void consumed() {
 
-
 	}
-
 
 }

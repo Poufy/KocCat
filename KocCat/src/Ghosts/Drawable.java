@@ -1,15 +1,14 @@
-package Edible;
+package Ghosts;
 
 import java.awt.Graphics;
-import java.util.Random;
 
 import GuiAndPlayer.Background;
+import GuiAndPlayer.Cat;
 
-public abstract class Edibles {
+public abstract class Drawable {
 	private int x, y;
-	Random rand = new Random();
 
-	public Edibles(int x, int y) {
+	public Drawable(int x, int y) {
 		setX(x);
 		setY(y);
 	}
@@ -43,7 +42,6 @@ public abstract class Edibles {
 
 	public abstract void draw(Graphics g);
 
-	public abstract void consumed();
+	public abstract void doAction();
 
-	public abstract void grow();
 }

@@ -6,7 +6,6 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import GuiAndPlayer.Background;
-import GuiAndPlayer.Drawable;
 
 public class Ash extends Drawable {
 	private Random rand = new Random();
@@ -30,7 +29,7 @@ public class Ash extends Drawable {
 		// TODO Auto-generated method stub
 		if (this.getX() == 0) {
 			movingRight = true;
-			//600 is the width of the screen -50 which is the size of Ash
+			// 600 is the width of the screen -50 which is the size of Ash
 		} else if (this.getX() == 600) {
 			movingRight = false;
 		}
@@ -39,6 +38,9 @@ public class Ash extends Drawable {
 			this.setX(this.getX() + 1);
 		} else {
 			this.setX(this.getX() - 1);
+		}
+		if (checkCollision()) {
+			Background.cat.die();
 		}
 
 	}
