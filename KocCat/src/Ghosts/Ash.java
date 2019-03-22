@@ -11,7 +11,6 @@ import GuiAndPlayer.Drawable;
 public class Ash extends Drawable {
 	private Random rand = new Random();
 	private boolean movingRight = true;
-	private final String ashPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\Ash.png";
 
 	public Ash(int x, int y) {
 		super(x, y);
@@ -21,7 +20,7 @@ public class Ash extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon ashImage = new ImageIcon(ashPath);
+		ImageIcon ashImage = new ImageIcon(getClass().getResource("Ash.png"));
 		g.drawImage(ashImage.getImage(), getX(), getY(), null);
 	}
 

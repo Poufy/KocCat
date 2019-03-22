@@ -9,7 +9,6 @@ public class Casper extends Drawable {
 	private Random rand = new Random();
 	private boolean movingDown = true;
 	private boolean movingRight = true;
-	private final String casperPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\Casper.png";
 
 	public Casper(int x, int y) {
 		super(x, y);
@@ -19,7 +18,7 @@ public class Casper extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon dollyImage = new ImageIcon(casperPath);
+		ImageIcon dollyImage = new ImageIcon(getClass().getResource("Casper.png"));
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 

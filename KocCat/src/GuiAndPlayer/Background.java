@@ -50,13 +50,13 @@ public class Background extends JPanel implements KeyListener {
 		// these numbers 666 and 689 make for a square frame if you call getWidth and
 		// getHeight both should be 650
 		frame.setSize(655, 678);
-		System.out.println(frame.getWidth());
+		// System.out.println(frame.getWidth());
 		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		// this line is to prevent user from changing the size as it would break the
 		// design.
-		frame.setResizable(false);
+		 frame.setResizable(false);
 		addKeyListener(this);
 
 //		Handler handler = new Handler();
@@ -73,7 +73,7 @@ public class Background extends JPanel implements KeyListener {
 			casper.doAction();
 			fruit.grow();
 			poison.grow();
-			checkCollision();
+			applyCollision();
 			System.out.println(cat.getScore());
 
 			// System.out.println("fruit age is: " + fruit.getAge());
@@ -82,7 +82,7 @@ public class Background extends JPanel implements KeyListener {
 
 			// System.out.println(cat.getScore());
 			try {
-				Thread.sleep(10);
+				Thread.sleep(8);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -110,25 +110,35 @@ public class Background extends JPanel implements KeyListener {
 		cat.draw(g);
 	}
 
-	public void checkCollision() {
+	public void applyCollision() {
 		// collision with fruits and poison
-		if (cat.getX() == fruit.getX() && cat.getY() == fruit.getY()) {
+		// 50 is the width and height of each image
+		if (checkCollision(cat.getX(), cat.getY(), fruit.getX(), fruit.getY())) {
 			// we increase the score first because setRandomLocation sets age = 1
 			cat.increaseScore(fruit.getAge() * 5);
-			fruit.setRandomLocation(50 * rand.nextInt(13), 50 * rand.nextInt(13));
-
-		} else if (cat.getX() == poison.getX() && cat.getY() == poison.getY()) {
+			fruit.setRandomLocation(rand.nextInt(600), rand.nextInt(600));
+		} else if (checkCollision(cat.getX(), cat.getY(), poison.getX(), poison.getY())) {
 			// make cat.decreaseScore
 			// set cat.isAlive false if
 			cat.decreaseScore(poison.getAge() * 10);
 
-		} else if (cat.getX() == ash.getX() && cat.getY() == ash.getY()) {
+		} else if (checkCollision(cat.getX(), cat.getY(), ash.getX(), ash.getY())) {
 			cat.die();
-		} else if (cat.getX() == dolly.getX() && cat.getY() == dolly.getY()) {
+		} else if (checkCollision(cat.getX(), cat.getY(), dolly.getX(), dolly.getY())) {
 			cat.die();
-		} else if (cat.getX() == casper.getX() && cat.getY() == casper.getY()) {
+		} else if (checkCollision(cat.getX(), cat.getY(), casper.getX(), casper.getY())) {
 			cat.die();
 		}
+	}
+
+	public boolean checkCollision(int xCat, int yCat, int xObject, int yObject) {
+		// all my images have the size of 50 and in this line of code I surround my
+		// images with a "box" with width and height 35 and if the cat comes into that
+		// box a collision happens
+		if ((xObject - 35 <= xCat && xCat <= xObject + 35) && (yObject - 35 <= yCat && yCat <= yObject + 35)) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

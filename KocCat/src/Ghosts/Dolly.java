@@ -11,8 +11,6 @@ import GuiAndPlayer.Drawable;
 public class Dolly extends Drawable {
 	private Random rand = new Random();
 	private boolean movingDown = true;
-	private final String dollyPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\Dolly.png";
-
 	public Dolly(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
@@ -21,7 +19,7 @@ public class Dolly extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon dollyImage = new ImageIcon(dollyPath);
+		ImageIcon dollyImage = new ImageIcon(getClass().getResource("Dolly.png"));
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 
