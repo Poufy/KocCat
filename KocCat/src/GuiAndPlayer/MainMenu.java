@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class MainMenu extends JFrame {
-
 	private final JTextField numGhosts;
 	private final JTextField numFruits;
 	private final JTextField numPoison;
@@ -21,9 +20,7 @@ public class MainMenu extends JFrame {
 	private final JLabel Fruits;
 	private final JLabel Poison;
 	public static int[] numbers = { 0, 0, 0 };
-
 	private final JButton start;
-
 	public MainMenu() {
 		super("KocCat Mainmenu");
 		setLayout(new GridLayout(6, 3));
@@ -72,22 +69,4 @@ public class MainMenu extends JFrame {
 		}
 	}
 
-//	private class TextFieldHandler implements ActionListener {
-//		// process textfield events
-//		@Override
-//		public void actionPerformed(ActionEvent event) {
-//
-//			// user pressed Enter in JTextField textField1
-//			if (event.getSource() == numGhosts)
-//				numbers[0] = Integer.parseInt(numGhosts.getText());
-//
-//			// user pressed Enter in JTextField textField2
-//			else if (event.getSource() == numFruits)
-//				numbers[1] = Integer.parseInt(numFruits.getText());
-//
-//			// user pressed Enter in JTextField textField3
-//			else if (event.getSource() == numPoison)
-//				numbers[2] = Integer.parseInt(numPoison.getText());
-//
-//		}
 } // end private inner class TextFieldHandler

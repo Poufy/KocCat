@@ -21,12 +21,5 @@ public class Run extends JFrame {
 
 	}
 
-//	private class ButtonHandler implements ActionListener {
-//		// handle button event
-//		@Override
-//		public void actionPerformed(ActionEvent event) {
-//			startButtonClicked = true;
-//		}
-//	}
 
 }
