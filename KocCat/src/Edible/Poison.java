@@ -43,7 +43,7 @@ public class Poison extends Edibles {
 
 	@Override
 	public void grow() {
-		this.age += 0.01;
+		this.age += 0.005;
 		if (this.age >= 10) {
 			try {
 				this.setImage(redPoisonPath);

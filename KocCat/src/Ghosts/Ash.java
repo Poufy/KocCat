@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 import GuiAndPlayer.Background;
 
 public class Ash extends Drawable {
-	private Random rand = new Random();
 	private boolean movingRight = true;
 
 	public Ash(int x, int y) {

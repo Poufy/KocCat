@@ -18,22 +18,22 @@ import Ghosts.Casper;
 import Ghosts.Dolly;
 import Ghosts.Drawable;
 
-public class Background extends JPanel implements KeyListener {
+public class Background extends JPanel implements KeyListener, Runnable {
 	public final int width = 650;
 	public final int height = 650;
 	private final String catUpPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_up.png";
 	private final String catDownPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_down.png";
 	private final String catRightPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_right.png";
 	private final String catLeftPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_left.png";
-	private final String backgroundPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\background1.png";
 	private final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
 	private final String greenPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_poison.png";
 	private Random rand = new Random();
 	private JFrame frame = new JFrame("KocCat");
-	private ImageIcon background = new ImageIcon(backgroundPath);
+	private ImageIcon background = new ImageIcon(getClass().getResource("background1.png"));
 	public static Cat cat = new Cat(300, 300);
 	ArrayList<Drawable> objects = new ArrayList<Drawable>();
 	ArrayList<Edibles> edibleObjects = new ArrayList<Edibles>();
+
 
 	public Background() {
 
@@ -48,6 +48,11 @@ public class Background extends JPanel implements KeyListener {
 		fillArray();
 		addKeyListener(this);
 		startMovingRight();
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		while (cat.getScore() >= 0) {
 			// check if the cat has reached the edges of the square
 			cat.isOnTheEdge();
@@ -58,13 +63,12 @@ public class Background extends JPanel implements KeyListener {
 				edibleObjects.get(i).grow();
 			}
 			try {
-				Thread.sleep(8);
+				Thread.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			repaint();
 		}
-
 	}
 
 	public void paint(Graphics g) {
@@ -82,7 +86,7 @@ public class Background extends JPanel implements KeyListener {
 
 	public void fillArray() {
 		objects.add(cat);
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < MainMenu.numbers[0]; i++) {
 			switch (rand.nextInt(3)) {
 			case 0:
 				objects.add(new Ash(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50)));
@@ -95,10 +99,10 @@ public class Background extends JPanel implements KeyListener {
 				break;
 			}
 		}
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < MainMenu.numbers[1]; i++) {
 			edibleObjects.add(new Fruit(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenApplePath));
 		}
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < MainMenu.numbers[2]; i++) {
 			edibleObjects
 					.add(new Poison(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenPoisonPath));
 		}

@@ -20,14 +20,13 @@ public class MainMenu extends JFrame {
 	private final JLabel Ghosts;
 	private final JLabel Fruits;
 	private final JLabel Poison;
+	public static int[] numbers = { 0, 0, 0 };
 
 	private final JButton start;
-	
-
 
 	public MainMenu() {
 		super("KocCat Mainmenu");
-		setLayout(new GridLayout(6,3));
+		setLayout(new GridLayout(6, 3));
 		Ghosts = new JLabel("Enter the number of ghosts");
 		add(Ghosts);
 		numGhosts = new JTextField(6);
@@ -43,22 +42,52 @@ public class MainMenu extends JFrame {
 
 		start = new JButton("Start the game!");
 
-		ButtonHandler handler = new ButtonHandler();
-		start.addActionListener(handler);
+		ButtonHandler buttonHandler = new ButtonHandler();
+		start.addActionListener(buttonHandler);
 		// adding the button to the JFrame
 		add(start);
 		this.setSize(500, 300);
 		this.setBackground(Color.cyan);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 
 	private class ButtonHandler implements ActionListener {
 		// handle button event
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			JOptionPane.showMessageDialog(null, "lol");
+			try {
+
+				numbers[0] = Integer.parseInt(numGhosts.getText());
+				numbers[1] = Integer.parseInt(numFruits.getText());
+				numbers[2] = Integer.parseInt(numPoison.getText());
+				Background background = new Background();
+				Thread thread = new Thread(background);
+				thread.start();
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Please enter an Integer");
+
+			}
+
 		}
 	}
-}
+
+//	private class TextFieldHandler implements ActionListener {
+//		// process textfield events
+//		@Override
+//		public void actionPerformed(ActionEvent event) {
+//
+//			// user pressed Enter in JTextField textField1
+//			if (event.getSource() == numGhosts)
+//				numbers[0] = Integer.parseInt(numGhosts.getText());
+//
+//			// user pressed Enter in JTextField textField2
+//			else if (event.getSource() == numFruits)
+//				numbers[1] = Integer.parseInt(numFruits.getText());
+//
+//			// user pressed Enter in JTextField textField3
+//			else if (event.getSource() == numPoison)
+//				numbers[2] = Integer.parseInt(numPoison.getText());
+//
+//		}
+} // end private inner class TextFieldHandler

@@ -29,7 +29,7 @@ public abstract class Drawable {
 		return y;
 	}
 
-	public boolean checkCollision() {
+	protected boolean checkCollision() {
 		// all my images have the size of 50 and in this line of code I surround my
 		// images with a "box" with width and height 35 and if the cat comes into that
 		// box a collision happens
