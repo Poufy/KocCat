@@ -32,10 +32,10 @@ public abstract class Edibles {
 
 	public boolean checkCollision() {
 		// all my images have the size of 50 and in this line of code I surround my
-		// images with a "box" with width and height 35 and if the cat comes into that
+		// images with a "box" with width and height 25 and if the cat comes into that
 		// box a collision happens
-		if ((this.getX() - 25 <= Background.cat.getX() && Background.cat.getX() <= this.getX() + 25)
-				&& (this.getY() - 25 <= Background.cat.getY() && Background.cat.getY() <= this.getY() + 25)) {
+		if ((this.getX() - 20 <= Background.cat.getX() && Background.cat.getX() <= this.getX() + 20)
+				&& (this.getY() - 20 <= Background.cat.getY() && Background.cat.getY() <= this.getY() + 20)) {
 			return true;
 		}
 		return false;

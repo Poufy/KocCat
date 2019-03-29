@@ -9,8 +9,8 @@ import GuiAndPlayer.Background;
 public class Fruit extends Edibles {
 	private double age = 1;
 	private String image;
-	private final String redApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\red_apple.png";
-	private final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
+	private final String redApplePath = ".\\src\\Images\\red_apple.png";
+	private final String greenApplePath = ".\\src\\Images\\green_apple.png";
 	Random rand = new Random();
 
 	public Fruit(int x, int y, String image) {
@@ -39,7 +39,7 @@ public class Fruit extends Edibles {
 
 	public void draw(Graphics g) {
 		ImageIcon fruitImage = new ImageIcon(this.image);
-		g.drawImage(fruitImage.getImage(), getX(), getY(), null);
+		g.drawImage(fruitImage.getImage(), getX(), getY(), 30 + (int) this.age * 2, 30 + (int) this.age * 2, null);
 	}
 
 	// this method returns the score to the cat to obtain if it consumes it
@@ -55,10 +55,7 @@ public class Fruit extends Edibles {
 				e.printStackTrace();
 			}
 		}
-		if (checkCollision()) {
-			Background.cat.increaseScore((int) this.getAge() * 5);
-			this.setRandomLocation(rand.nextInt(600), rand.nextInt(600));
-		}
+
 		consumed();// this is only called when age is 10
 	}
 
@@ -75,6 +72,10 @@ public class Fruit extends Edibles {
 				e.printStackTrace();
 			}
 			this.age = 1;
+		}
+		if (checkCollision()) {
+			Background.cat.increaseScore((int) this.getAge() * 5);
+			this.setRandomLocation(rand.nextInt(600), rand.nextInt(600));
 		}
 
 	}

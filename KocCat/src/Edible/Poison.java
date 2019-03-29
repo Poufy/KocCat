@@ -9,8 +9,8 @@ import GuiAndPlayer.Background;
 public class Poison extends Edibles {
 	private double age = 1;
 	private String image;
-	private final String redPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\red_poison.png";
-	public final String greenPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_poison.png";
+	private final String redPoisonPath = ".\\src\\Images\\red_poison.png";
+	public final String greenPoisonPath = ".\\src\\Images\\green_poison.png";
 	Random rand = new Random();
 
 	public Poison(int x, int y, String image) {
@@ -38,7 +38,10 @@ public class Poison extends Edibles {
 
 	public void draw(Graphics g) {
 		ImageIcon fruitImage = new ImageIcon(this.image);
-		g.drawImage(fruitImage.getImage(), getX(), getY(), null);
+		int width = 35 + (int) this.age * 2;
+		if(width > 50) 
+			width = 50;
+		g.drawImage(fruitImage.getImage(), getX(), getY(),width , width, null);
 	}
 
 	@Override
@@ -52,13 +55,13 @@ public class Poison extends Edibles {
 				e.printStackTrace();
 			}
 		}
-		if (checkCollision()) {
-			Background.cat.decreaseScore((int)this.age * 10);
-		}
+		consumed();
 	}
 
 	public void consumed() {
-
+		if (checkCollision()) {
+			Background.cat.decreaseScore((int)this.age * 10);
+		}
 	}
 
 }

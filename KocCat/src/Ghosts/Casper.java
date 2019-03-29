@@ -19,7 +19,7 @@ public class Casper extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon dollyImage = new ImageIcon(getClass().getResource("Casper.png"));
+		ImageIcon dollyImage = new ImageIcon(".\\src\\Images\\Casper.png");
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 
@@ -32,10 +32,9 @@ public class Casper extends Drawable {
 			if (this.getY() == 0) {
 				movingDown = true;
 				// 600 is the width of the screen -50 which is the size of Ash
-			} else if (this.getY() == 600) {
+			} else if (this.getY() == 570) {
 				movingDown = false;
 			}
-
 			if (movingDown) {
 				this.setY(this.getY() + 1);
 			} else {
@@ -51,12 +50,15 @@ public class Casper extends Drawable {
 			}
 
 			if (movingRight) {
+
 				this.setX(this.getX() + 1);
 			} else {
+
 				this.setX(this.getX() - 1);
 			}
 			break;
 		}
+
 		if (checkCollision()) {
 			Background.cat.die();
 		}

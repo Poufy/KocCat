@@ -1,5 +1,6 @@
 package GuiAndPlayer;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -23,7 +24,7 @@ public class MainMenu extends JFrame {
 	private final JButton start;
 	public MainMenu() {
 		super("KocCat Mainmenu");
-		setLayout(new GridLayout(6, 3));
+		setLayout(new GridLayout(4,3));
 		Ghosts = new JLabel("Enter the number of ghosts");
 		add(Ghosts);
 		numGhosts = new JTextField(6);
@@ -53,8 +54,8 @@ public class MainMenu extends JFrame {
 		// handle button event
 		@Override
 		public void actionPerformed(ActionEvent event) {
+			//add start on pressing enter button
 			try {
-
 				numbers[0] = Integer.parseInt(numGhosts.getText());
 				numbers[1] = Integer.parseInt(numFruits.getText());
 				numbers[2] = Integer.parseInt(numPoison.getText());

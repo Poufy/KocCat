@@ -12,7 +12,7 @@ public class Dolly extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon dollyImage = new ImageIcon(getClass().getResource("Dolly.png"));
+		ImageIcon dollyImage = new ImageIcon(".\\src\\Images\\Dolly.png");
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 
@@ -23,7 +23,7 @@ public class Dolly extends Drawable {
 		if (this.getY() == 0) {
 			movingDown = true;
 			// 600 is the width of the screen -50 which is the size of Ash
-		} else if (this.getY() == 600) {
+		} else if (this.getY() == 580) {
 			movingDown = false;
 		}
 

@@ -64,8 +64,6 @@ public class Cat extends Drawable {
 		case 1:
 			if (!rightBlocked)
 				this.setX(this.getX() + 1);
-			// System.out.println(this.getX());
-			// System.out.println(rightBlocked);
 			break;
 		case 2:
 			if (!leftBlocked)
@@ -107,12 +105,12 @@ public class Cat extends Drawable {
 			upBlocked = true;
 		else
 			upBlocked = false;
-		if (this.getY() >= 600)
+		if (this.getY() >= 580)
 			downBlocked = true;
 		else
 			downBlocked = false;
 	}
-	//the loop runs as long as the score is >= 0 so this stops the game
+
 	public void die() {
 		this.score = -1;
 	}

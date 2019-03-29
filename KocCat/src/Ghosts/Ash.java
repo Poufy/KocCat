@@ -18,7 +18,7 @@ public class Ash extends Drawable {
 	@Override
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		ImageIcon ashImage = new ImageIcon(getClass().getResource("Ash.png"));
+		ImageIcon ashImage = new ImageIcon(".\\src\\Images\\Ash.png");
 		g.drawImage(ashImage.getImage(), getX(), getY(), null);
 	}
 

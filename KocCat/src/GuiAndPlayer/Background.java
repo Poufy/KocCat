@@ -19,28 +19,27 @@ import Ghosts.Dolly;
 import Ghosts.Drawable;
 
 public class Background extends JPanel implements KeyListener, Runnable {
-	public final int width = 650;
-	public final int height = 650;
-	private final String catUpPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_up.png";
-	private final String catDownPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_down.png";
-	private final String catRightPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_right.png";
-	private final String catLeftPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\cat_left.png";
-	private final String greenApplePath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_apple.png";
-	private final String greenPoisonPath = "C:\\Users\\MCE\\git\\KocCat\\KocCat\\src\\Images\\green_poison.png";
+	public static final int width = 650;
+	public static final int height = 650;
+	private final String catUpPath = ".\\src\\Images\\cat_up.png";
+	private final String catDownPath = ".\\src\\Images\\cat_down.png";
+	private final String catRightPath = ".\\src\\Images\\cat_right.png";
+	private final String catLeftPath = ".\\src\\Images\\cat_left.png";
+	private final String greenApplePath = ".\\src\\Images\\green_apple.png";
+	private final String greenPoisonPath = ".\\src\\Images\\green_poison.png";
 	private Random rand = new Random();
 	private JFrame frame = new JFrame("KocCat");
-	private ImageIcon background = new ImageIcon(getClass().getResource("background1.png"));
+	private ImageIcon background = new ImageIcon(".\\src\\Images\\background1.png");
 	public static Cat cat = new Cat(300, 300);
 	ArrayList<Drawable> objects = new ArrayList<Drawable>();
 	ArrayList<Edibles> edibleObjects = new ArrayList<Edibles>();
-
 
 	public Background() {
 
 		setFocusable(true); // adding the panel to the frame.
 		frame.add(this);// setting the size of the frame to the size of the images
-		// these numbers 666 and 689 make for a square frame if you call getWidth and
-		frame.setSize(655, 678);
+		frame.setSize(width, height);
+		System.out.println(frame.getWidth());
 		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -52,7 +51,6 @@ public class Background extends JPanel implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while (cat.getScore() >= 0) {
 			// check if the cat has reached the edges of the square
 			cat.isOnTheEdge();
@@ -63,7 +61,7 @@ public class Background extends JPanel implements KeyListener, Runnable {
 				edibleObjects.get(i).grow();
 			}
 			try {
-				Thread.sleep(3);
+				Thread.sleep(4);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -157,17 +155,16 @@ public class Background extends JPanel implements KeyListener, Runnable {
 	/*
 	 * this method is only for making the cat move to the right from the beginning.
 	 * it only initializes a robot that presses the right button so the cat starts
-	 * moving right away if this is a violation of the rules then please just delete
-	 * this method.*
+	 * moving right away 
 	 */
 	public void startMovingRight() {
 		try {
 			Robot robot = new Robot();
 			// Simulate a key press
-			for (int i = 0; i < 3; i++) {
-				robot.keyPress(KeyEvent.VK_RIGHT);
-				robot.keyRelease(KeyEvent.VK_RIGHT);
-			}
+
+			robot.keyPress(KeyEvent.VK_RIGHT);
+			robot.keyRelease(KeyEvent.VK_RIGHT);
+
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
