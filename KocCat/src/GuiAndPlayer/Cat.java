@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import Ghosts.Drawable;
 
 public class Cat extends Drawable {
-	private int direction;
+	private Directions direction = Directions.RIGHT;
 	private int score;
 	private String image;
 	private boolean isAlive = true, rightBlocked = false, leftBlocked = false, upBlocked = false, downBlocked = false;
@@ -54,41 +54,38 @@ public class Cat extends Drawable {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		ImageIcon catImage = new ImageIcon(this.image);
-		g.drawImage(catImage.getImage(), getX(), getY(), null);
+		g.drawImage(catImage.getImage(), getX(), getY(), 50, 50, null);
 	}
 
 	@Override
 	public void doAction() {
 		// TODO Auto-generated method stub
 		switch (direction) {
-		case 1:
+		case RIGHT:
 			if (!rightBlocked)
 				this.setX(this.getX() + 1);
 			break;
-		case 2:
+		case LEFT:
 			if (!leftBlocked)
 				this.setX(this.getX() - 1);
-
 			break;
-		case 3:
+		case UP:
 			if (!upBlocked)
 				this.setY(this.getY() - 1);
-
 			break;
-		case 4:
+		case DOWN:
 			if (!downBlocked)
 				this.setY(this.getY() + 1);
-
 			break;
 		}
 
 	}
 
-	public int getDirection() {
+	public Directions getDirection() {
 		return direction;
 	}
 
-	public void setDirection(int direction) {
+	public void setDirection(Directions direction) {
 		this.direction = direction;
 	}
 

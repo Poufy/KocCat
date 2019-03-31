@@ -1,37 +1,31 @@
 package Ghosts;
 
 import java.awt.Graphics;
-import java.util.Random;
 import javax.swing.ImageIcon;
-
 import GuiAndPlayer.Background;
 
 public class Casper extends Drawable {
-	private Random rand = new Random();
-	private boolean movingDown = true;
-	private boolean movingRight = true;
+	private boolean movingDown;
+	private boolean movingRight;
+	private int counter = 0;
 
 	public Casper(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		ImageIcon dollyImage = new ImageIcon(".\\src\\Images\\Casper.png");
+		ImageIcon dollyImage = new ImageIcon("./src/Images/Casper.png");
 		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
 	}
 
 	@Override
 	public void doAction() {
-		// TODO Auto-generated method stub
 
-		switch (rand.nextInt(2)) {
-		case 0:
+		if (counter < 300) {
 			if (this.getY() == 0) {
 				movingDown = true;
-				// 600 is the width of the screen -50 which is the size of Ash
+
 			} else if (this.getY() == 570) {
 				movingDown = false;
 			}
@@ -40,25 +34,27 @@ public class Casper extends Drawable {
 			} else {
 				this.setY(this.getY() - 1);
 			}
-			break;
-		case 1:
+			counter++;
+		} else if (counter >= 300) {
+
 			if (this.getX() == 0) {
 				movingRight = true;
-				// 600 is the width of the screen -50 which is the size of Ash
+
 			} else if (this.getX() == 600) {
 				movingRight = false;
 			}
-
 			if (movingRight) {
 
 				this.setX(this.getX() + 1);
 			} else {
-
 				this.setX(this.getX() - 1);
 			}
-			break;
-		}
+			counter++;
 
+			if (counter == 600) {
+				counter = 0;
+			}
+		}
 		if (checkCollision()) {
 			Background.cat.die();
 		}
@@ -66,3 +62,40 @@ public class Casper extends Drawable {
 	}
 
 }
+/* uncomment this method for diagonal movement of Casper instead of Random */
+//	@Override
+//	public void doAction() {
+//		// TODO Auto-generated method stub
+//
+//		if (this.getY() == 0) {
+//			movingDown = true;
+//			// 600 is the width of the screen -50 which is the size of Ash
+//		} else if (this.getY() == 570) {
+//			movingDown = false;
+//		}
+//		if (movingDown) {
+//			this.setY(this.getY() + 1);
+//		} else {
+//			this.setY(this.getY() - 1);
+//		}
+//
+//		if (this.getX() == 0) {
+//			movingRight = true;
+//			// 600 is the width of the screen -50 which is the size of Ash
+//		} else if (this.getX() == 600) {
+//			movingRight = false;
+//		}
+//
+//		if (movingRight) {
+//
+//			this.setX(this.getX() + 1);
+//		} else {
+//
+//			this.setX(this.getX() - 1);
+//		}
+//
+//		if (checkCollision()) {
+//			Background.cat.die();
+//		}
+//
+//	}

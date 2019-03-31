@@ -10,6 +10,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
 import Edible.Edibles;
 import Edible.Fruit;
 import Edible.Poison;
@@ -30,17 +32,16 @@ public class Background extends JPanel implements KeyListener, Runnable {
 	private Random rand = new Random();
 	private JFrame frame = new JFrame("KocCat");
 	private ImageIcon background = new ImageIcon(".\\src\\Images\\background1.png");
+	private ImageIcon gameOver = new ImageIcon(".\\src\\Images\\Game over.jpg");
 	public static Cat cat = new Cat(300, 300);
 	ArrayList<Drawable> objects = new ArrayList<Drawable>();
 	ArrayList<Edibles> edibleObjects = new ArrayList<Edibles>();
 
 	public Background() {
 
-		setFocusable(true); // adding the panel to the frame.
-		frame.add(this);// setting the size of the frame to the size of the images
+		setFocusable(true);
+		frame.add(this);
 		frame.setSize(width, height);
-		System.out.println(frame.getWidth());
-		// setting the close operation so the app stops working even in the background.
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -49,6 +50,10 @@ public class Background extends JPanel implements KeyListener, Runnable {
 		startMovingRight();
 	}
 
+	/*
+	 * This is the main running method for the program from the interface runnable
+	 * to run the GUI on a separate thread.
+	 */
 	@Override
 	public void run() {
 		while (cat.getScore() >= 0) {
@@ -67,22 +72,31 @@ public class Background extends JPanel implements KeyListener, Runnable {
 			}
 			repaint();
 		}
+		background.setImage(gameOver.getImage());
 	}
 
+	/*
+	 * This method first draws the background and then draws every object on the
+	 * screen
+	 */
 	public void paint(Graphics g) {
 		// painting the background with the image we have
-		g.drawImage(background.getImage(), 0, 0, null);
-
+		g.drawImage(background.getImage(), 0, 0, 650, 650, null);
 		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).draw(g);
 		}
 		for (int i = 0; i < edibleObjects.size(); i++) {
 			edibleObjects.get(i).draw(g);
 		}
-		g.drawString("Score: " + cat.getScore(), 10, 10);
+		g.drawString("Score: " + cat.getScore(), 15, 15);
 	}
 
-	public void fillArray() {
+	/*
+	 * In this method we fill the array of objects we have with random objects
+	 * within random bounds(from 0 to getWidth()-50) for the x Axis and from 0 to
+	 * getHeight()-50 for the Y axis
+	 */
+	private void fillArray() {
 		objects.add(cat);
 		for (int i = 0; i < MainMenu.numbers[0]; i++) {
 			switch (rand.nextInt(3)) {
@@ -107,37 +121,43 @@ public class Background extends JPanel implements KeyListener, Runnable {
 	}
 
 	@Override
-	// 1 for right 2 for left 3 for up 4 for down
+	/*
+	 * I used an Enum class to manage some variables (RIGHT, LEFT, UP, DOWN) to
+	 * change the movement of the cat
+	 */
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			cat.setDirection(1);
-
+			cat.setDirection(Directions.RIGHT);
 			try {
 				cat.setImage(catRightPath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			cat.setDirection(2);
+			cat.setDirection(Directions.LEFT);
 			try {
 				cat.setImage(catLeftPath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			cat.setDirection(3);
+			cat.setDirection(Directions.UP);
 			try {
 				cat.setImage(catUpPath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			cat.setDirection(4);
+			cat.setDirection(Directions.DOWN);
 			try {
 				cat.setImage(catDownPath);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+		}
+		// this line is for exiting the game with only the escape button
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
 		}
 
 	}
@@ -155,13 +175,12 @@ public class Background extends JPanel implements KeyListener, Runnable {
 	/*
 	 * this method is only for making the cat move to the right from the beginning.
 	 * it only initializes a robot that presses the right button so the cat starts
-	 * moving right away 
+	 * moving right away
 	 */
-	public void startMovingRight() {
+	private void startMovingRight() {
 		try {
 			Robot robot = new Robot();
 			// Simulate a key press
-
 			robot.keyPress(KeyEvent.VK_RIGHT);
 			robot.keyRelease(KeyEvent.VK_RIGHT);
 
@@ -169,5 +188,9 @@ public class Background extends JPanel implements KeyListener, Runnable {
 			e.printStackTrace();
 		}
 	}
+
+//	private void endGame(Graphics g) {
+//		g.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer)
+//	}
 
 }

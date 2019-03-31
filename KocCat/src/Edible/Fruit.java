@@ -56,16 +56,16 @@ public class Fruit extends Edibles {
 			}
 		}
 
-		consumed();// this is only called when age is 10
+		consumed();// this is only called when age is >= 10 (Look at the consumed method)
 	}
 
 	/*
-	 * In this method I respawn the fruit when its age is 10 and also reinitlize the
-	 * random X and Y so the fruit does not spawn in the same location
+	 * In this method I re-spawn the fruit when its age is 10 and also reinitialize
+	 * the random X and Y so the fruit does not spawn in the same location
 	 */
 	public void consumed() {
 		if (this.getAge() >= 10) {
-			setRandomLocation(rand.nextInt(600), rand.nextInt(600));
+			setRandomLocation(rand.nextInt(570), rand.nextInt(570));
 			try {
 				this.setImage(greenApplePath);
 			} catch (Exception e) {
@@ -87,7 +87,6 @@ public class Fruit extends Edibles {
 		try {
 			this.setImage(greenApplePath);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.age = 1;
