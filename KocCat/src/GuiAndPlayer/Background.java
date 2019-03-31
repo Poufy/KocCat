@@ -45,7 +45,13 @@ public class Background extends JPanel implements KeyListener, Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		fillArray();
+		// check if the numbers of ghosts is divisible by 3 so if we have 15 as input, for example, we
+		// spawn 5 of each type
+		if (MainMenu.numbers[2] % 3 == 0) {
+			fillArrayEvenly(MainMenu.numbers[2]);
+		} else {
+			fillArrayRandomly();
+		}
 		addKeyListener(this);
 		startMovingRight();
 	}
@@ -96,9 +102,16 @@ public class Background extends JPanel implements KeyListener, Runnable {
 	 * within random bounds(from 0 to getWidth()-50) for the x Axis and from 0 to
 	 * getHeight()-50 for the Y axis
 	 */
-	private void fillArray() {
+	private void fillArrayRandomly() {
 		objects.add(cat);
 		for (int i = 0; i < MainMenu.numbers[0]; i++) {
+			edibleObjects
+					.add(new Poison(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenPoisonPath));
+		}
+		for (int i = 0; i < MainMenu.numbers[1]; i++) {
+			edibleObjects.add(new Fruit(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenApplePath));
+		}
+		for (int i = 0; i < MainMenu.numbers[2]; i++) {
 			switch (rand.nextInt(3)) {
 			case 0:
 				objects.add(new Ash(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50)));
@@ -111,10 +124,20 @@ public class Background extends JPanel implements KeyListener, Runnable {
 				break;
 			}
 		}
+
+	}
+
+	private void fillArrayEvenly(int numberOfEachGhost) {
+		objects.add(cat);
+		for (int i = 0; i < MainMenu.numbers[2] / 3; i++) {
+			objects.add(new Ash(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50)));
+			objects.add(new Dolly(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50)));
+			objects.add(new Casper(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50)));
+		}
 		for (int i = 0; i < MainMenu.numbers[1]; i++) {
 			edibleObjects.add(new Fruit(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenApplePath));
 		}
-		for (int i = 0; i < MainMenu.numbers[2]; i++) {
+		for (int i = 0; i < MainMenu.numbers[0]; i++) {
 			edibleObjects
 					.add(new Poison(rand.nextInt(getWidth() - 50), rand.nextInt(getHeight() - 50), greenPoisonPath));
 		}

@@ -15,14 +15,17 @@ public class Casper extends Drawable {
 
 	@Override
 	public void draw(Graphics g) {
-		ImageIcon dollyImage = new ImageIcon("./src/Images/Casper.png");
-		g.drawImage(dollyImage.getImage(), getX(), getY(), null);
+		ImageIcon casperImage = new ImageIcon("./src/Images/Casper.png");
+		g.drawImage(casperImage.getImage(), getX(), getY(), 50, 50, null);
 	}
 
+	/*
+	 * The counter is for making Casper move in one direction for a certain amount
+	 * of time
+	 */
 	@Override
 	public void doAction() {
-
-		if (counter < 300) {
+		if (counter < 400) {
 			if (this.getY() == 0) {
 				movingDown = true;
 
@@ -35,34 +38,30 @@ public class Casper extends Drawable {
 				this.setY(this.getY() - 1);
 			}
 			counter++;
-		} else if (counter >= 300) {
-
+		} else if (counter >= 400) {
 			if (this.getX() == 0) {
 				movingRight = true;
-
 			} else if (this.getX() == 600) {
 				movingRight = false;
 			}
 			if (movingRight) {
-
 				this.setX(this.getX() + 1);
 			} else {
 				this.setX(this.getX() - 1);
 			}
 			counter++;
-
-			if (counter == 600) {
+			if (counter == 800) {
 				counter = 0;
 			}
 		}
 		if (checkCollision()) {
 			Background.cat.die();
 		}
-
 	}
 
 }
 /* uncomment this method for diagonal movement of Casper instead of Random */
+
 //	@Override
 //	public void doAction() {
 //		// TODO Auto-generated method stub

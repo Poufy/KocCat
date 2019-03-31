@@ -22,27 +22,31 @@ public class MainMenu extends JFrame {
 	public MainMenu() {
 		super("KocCat Mainmenu");
 		setLayout(new GridLayout(4, 3));
-		ghosts = new JLabel("Enter the number of ghosts");
-		numGhosts = new JTextField(6);
-		fruits = new JLabel("Enter the number of fruits");
-		numFruits = new JTextField(6);
+
 		poison = new JLabel("Enter the number of poison");
+		add(poison);
 		numPoison = new JTextField(6);
+
 		// when at the third field press enter to start the game instead of clicking at
 		// the button.
-		numPoison.addActionListener(new ActionListener() {
+		add(numPoison);
+		fruits = new JLabel("Enter the number of fruits");
+		add(fruits);
+
+		numFruits = new JTextField(6);
+		add(numFruits);
+
+		ghosts = new JLabel("Enter the number of ghosts");
+		add(ghosts);
+
+		numGhosts = new JTextField(6);
+		numGhosts.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				start.doClick();
 			}
 		});
-		add(poison);
-		add(numFruits);
-		add(fruits);
 		add(numGhosts);
-		add(ghosts);
-		add(numPoison);
-
 		start = new JButton("Start the game!");
 
 		ButtonHandler buttonHandler = new ButtonHandler();
@@ -58,9 +62,9 @@ public class MainMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			try {
-				numbers[0] = Integer.parseInt(numGhosts.getText());
+				numbers[0] = Integer.parseInt(numPoison.getText());
 				numbers[1] = Integer.parseInt(numFruits.getText());
-				numbers[2] = Integer.parseInt(numPoison.getText());
+				numbers[2] = Integer.parseInt(numGhosts.getText());
 				Background background = new Background();
 				Thread thread = new Thread(background);
 				thread.start(); // start the thread that starts the main program this calls the run() method in
